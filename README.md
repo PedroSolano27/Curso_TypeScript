@@ -1,2 +1,2 @@
 # Curso_TypeScript
-Projetos do curso de TypeScript com React
+Esse repositório contém os projetos do curso de TypeScript com React, antes presentes no Repositório CursoGit.
