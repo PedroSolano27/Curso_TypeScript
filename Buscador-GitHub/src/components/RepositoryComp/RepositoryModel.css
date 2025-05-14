@@ -1,0 +1,54 @@
+/* Estilos do componente de repositório */
+
+.repository {
+    background-color: #0e1129;
+    padding: 2rem;
+    border: 2px solid #9da5d1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1 0 100%;
+    align-items: start;
+}
+
+.repository p{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.repository a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: #9da5d1;
+    background-color: #2b3566;
+    border-radius: 5px;
+}
+
+.repository a:hover {
+    background-color: #4e516d;
+}
+
+.stats {
+    display: flex;
+    gap: 1rem;
+}
+
+.stats section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border: 1px solid #9da5d1;
+    border-radius: 3px;
+    padding-right: 0.4rem;
+}
+
+.stats svg {
+    background-color: #4ed8c7;
+    padding: 0.2rem 0.4rem;
+    font-size: 2rem;
+}

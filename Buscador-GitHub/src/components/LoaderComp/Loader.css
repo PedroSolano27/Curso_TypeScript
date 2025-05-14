@@ -1,0 +1,21 @@
+/* Estilos do componente de carregamento */
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+}
+
+#loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+#loader svg {
+    font-size: 20px;
+    animation: rotate 2s linear infinite;
+}
