@@ -1,11 +1,11 @@
 // Implementação mock do HttpPostClient.ts
-import { HttpPostClient } from "../Http/HttpPostClient";
+import { HttpPostClient, PostParams } from "../Http/HttpPostClient";
 
 export class HttpPostClientMock implements HttpPostClient {
     url?: string;
     
-    async post(url: string): Promise <void> {
-        this.url = url;
+    async post(params: PostParams): Promise <void> {
+        this.url = params.url;
         return Promise.resolve();
     }
 }

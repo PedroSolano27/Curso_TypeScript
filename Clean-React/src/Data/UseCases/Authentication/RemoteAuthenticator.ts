@@ -1,5 +1,6 @@
 // Realiza a autenticação de usuário de forma remota
 import { HttpPostClient } from "Data/Protocols/Http/HttpPostClient";
+import { Authentication } from "Domain/UseCases/Authenticator";
 
 
 export class RemoteAuthenticator {
@@ -8,7 +9,10 @@ export class RemoteAuthenticator {
         private readonly PostClient: HttpPostClient,
     ) {}
 
-    async auth(): Promise <void> {
-        await this.PostClient.post(this.url);
+    async auth(params: Authentication): Promise <void> {
+        await this.PostClient.post({
+            url: this.url,
+            body: params
+        });
     }
 }

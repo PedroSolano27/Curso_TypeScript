@@ -1,7 +1,7 @@
 // Faz a autrnticação de usuários
 import { AccountModel } from "Domain/Models/AccountModel";
 
-type Authentication = {
+export type Authentication = {
     email: string,
     password: string,
 };
