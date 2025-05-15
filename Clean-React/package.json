@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest -- --watch",
+    "test:staged": "jest -- findRelatedTests",
+    "test:ci": "jest -- --coverage"
   },
   "keywords": [],
   "author": "",

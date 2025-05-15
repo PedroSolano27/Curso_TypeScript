@@ -11,6 +11,6 @@ describe('AxiosHttpClient', () => {
         const url = faker.internet.url()
         const sut = new AxiosHttpClient();
         await sut.post({ url });
-        expect (AxiosMock).toHaveBeenCalledWith(url);
-    })
-})
+        expect (AxiosMock).toHaveBeenCalledWith({url});
+    });
+});
