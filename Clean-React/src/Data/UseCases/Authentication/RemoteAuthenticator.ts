@@ -2,7 +2,8 @@
 import { HttpPostClient } from "Data/Protocols/Http/HttpPostClient";
 import { Authentication } from "Domain/UseCases/Authenticator";
 import { HttpStatusCode } from "Data/Protocols/Http/HttpResponseClient";
-import { InvalidCredencials } from "Domain/Errors/InvalidCredencialsError";
+import { InvalidCredencialsError } from "Domain/Errors/InvalidCredencialsError";
+import { UnexpectedError } from "Domain/Errors/UnexpectedError";
 
 export class RemoteAuthenticator {
     constructor (
@@ -17,10 +18,11 @@ export class RemoteAuthenticator {
             body: params
         });
 
-        // Caso o erro seja 401 dá a mensagem de Credenciais inválidas
+        // Verifica o código e devolve a resposta apropriada
         switch(response.status) {
-            case (HttpStatusCode.unauthorized): throw new InvalidCredencials; 
-            default: return Promise.resolve()
+            case (HttpStatusCode.ok): break;
+            case (HttpStatusCode.unauthorized): throw new InvalidCredencialsError;
+            default: throw new UnexpectedError; 
         }
     }
 }
