@@ -5,7 +5,6 @@ import { PostParams } from "Data/Protocols/Http/HttpPostClient";
 import faker from "faker";
 
 jest.mock("Axios");
-const AxiosMock = axios as jest.Mocked <typeof axios>;                          // Faz um Mock de um Axios
 
 function makeSut(): AxiosHttpClient {                                           // Cria um AxiosHttpClient
     return new AxiosHttpClient();
@@ -16,26 +15,31 @@ function mockRequest(): PostParams<any> {                                       
         body: faker.random.objectElement(),
     }    
 }
-const mockedResult = {                                                          // Simula resultados de um POST
-    data: faker.random.objectElement(),
-    status: faker.random.number(),
+function mockAxios(): jest.Mocked <typeof axios> {                              // Cria um Mock do Axios
+    const mockedAxios = axios as jest.Mocked <typeof axios>;
+    const mockedResult = {
+        data: faker.random.objectElement(),
+        status: faker.random.number(),
+    }
+    
+    mockedAxios.post.mockResolvedValue(mockedResult as Axios.AxiosXHR<any>);
+    return mockedAxios;
 }
-AxiosMock.post.mockResolvedValue(mockedResult as Axios.AxiosXHR<any>);          // Faz um Mock do resultado de um POST
+
 
 describe("AxiosHttpClient", () => { 
-    test("Should call axios with correct Verb, URL and Body", async() => {      // Testa se o Axios recebe os Parâmetros corretos
+    test("Should call axios with correct Verb, URL and Body", async() => {      // Testa se o Axios recebe o URL e Body corretos
         const request = mockRequest();
         const sut = makeSut();
+        const mockedAxios = mockAxios();
         await sut.post(request);
-        expect (AxiosMock.post).toHaveBeenCalledWith(request.url, request.body);
+        expect (mockedAxios.post).toHaveBeenCalledWith(request.url, request.body);
     });
 
-    test("Should creturn correct Status and Body", async() => {                 // Testa se o Axios retorna os Parâmetros corretos
+    test("Should creturn correct Status and Body", async() => {                 // Testa se o Axios retorna o Status e Body corretos
         const sut = makeSut();
-        const response = await sut.post(mockRequest());
-        expect (response).toEqual({
-            status: mockedResult.status,
-            body: mockedResult.data,
-        });
+        const mockedAxios = mockAxios();
+        const promise = sut.post(mockRequest());
+        expect (promise).toEqual(mockedAxios.post.mock.results[0].value);
     });
 });
