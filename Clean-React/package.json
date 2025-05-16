@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --passWithNoTests",
+    "start": "webpack-dev-server --open",
+    "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "jest -- --watch",
     "test:staged": "jest -- findRelatedTests",
     "test:ci": "jest -- --coverage"
@@ -26,6 +27,10 @@
     "@types/axios": "^0.9.36",
     "@types/jest": "^29.5.14",
     "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.5"
+    "@types/react-dom": "^19.1.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
   }
 }
