@@ -4,13 +4,32 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
     mode: "development",
+
     entry: "./src/Main/index.tsx",
+
     output: {
-        path: path.join(_dirname, "public/js"),
-        publicPath: "/public/js",
+        path: path.join(__dirname, "public/js"),
+        publicPath: "/js",
         filename: "bundle.js",
     },
-    resolve: { extensions: [".ts", ".tsx", ".js", ".css", ".scss"] },
+
+    resolve: { extensions: [".ts", ".tsx", ".js", ".css"] },
+
+    devtool: "source-map",
+
+    devServer: {
+        static: {
+            directory: path.join(__dirname, "public"),
+        },
+        historyApiFallback: {
+            disableDotRule: true,
+            rewrites: [
+                { from: /^\/js\/bundle\.js$/, to: '/js/bundle.js' }, // <-- importante
+            ],
+        },
+        port: 8080,
+    },
+
     module: {
         rules: [
             {
@@ -19,26 +38,11 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(s?)css$/,
-                use: [{
-                    loader: "style-loader",
-                }, {
-                    loader: "css-loader",
-                    options: { modules: true },
-                }, {
-                    loader: "sass-loader",
-                }]
+                test: /\.css$/,
+                use: [ "style-loader","css-loader",]
             }
-        ]
+        ],
     },
-    devServer: {
-        contentBase: "./public",
-        writeToDisk: true,
-        historyApiFallback: true,
-    },
-    externals: {
-        react: "React",
-        "react-dom": "ReactDOM",
-    },
-    plugins: [ new CleanWebpackPlugin() ],
-}
+    
+    plugins: [new CleanWebpackPlugin()],
+};
