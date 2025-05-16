@@ -8,17 +8,37 @@ module.exports = {
     output: {
         path: path.join(_dirname, "public/js"),
         publicPath: "/public/js",
-        filename: "bundle.js"
+        filename: "bundle.js",
     },
-    resolve: { extensions: [".ts", ".tsx", ".js"] },
+    resolve: { extensions: [".ts", ".tsx", ".js", ".css", ".scss"] },
+    module: {
+        rules: [
+            {
+                test: /\.ts(x?)$/,
+                loader: "ts-loader",
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(s?)css$/,
+                use: [{
+                    loader: "style-loader",
+                }, {
+                    loader: "css-loader",
+                    options: { modules: true },
+                }, {
+                    loader: "sass-loader",
+                }]
+            }
+        ]
+    },
     devServer: {
         contentBase: "./public",
         writeToDisk: true,
-        historyApiFallback: true
+        historyApiFallback: true,
     },
     externals: {
         react: "React",
-        "react-dom": "ReactDOM"
+        "react-dom": "ReactDOM",
     },
-    plugins: [ new CleanWebpackPlugin() ]
+    plugins: [ new CleanWebpackPlugin() ],
 }
