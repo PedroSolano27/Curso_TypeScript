@@ -1,5 +1,56 @@
 /* Estilos da página de Login */
 
 #login {
-    background-color: red;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 8px 6px;
+}
+
+#login h2 {
+    color: #041b42;
+}
+
+#login .wrong {
+    background-color: #fff2f2;
+    border: 1px solid #b41212;
+}
+
+#login button {
+    height: 40px;
+    width: 200px;
+}
+
+.login-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.login-inputs a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: #053586;
+}
+
+.login-inputs a:hover {
+    opacity: 0.8;
+}
+
+.status-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+}
+
+.status-msg .spinner {
+    display: none;
+}
+
+.status-msg p {
+    color: #b41212;
+    display: none;
 }
